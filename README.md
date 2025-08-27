@@ -36,7 +36,7 @@ It is fully serverless and can scale automatically.
 
 ## Architecture
 
-```mermaid
+```text
 Client (Web/App)
       |
       v
