@@ -1,6 +1,4 @@
-Got it! Since you want a **comprehensive README.md** for your AWS Serverless project (the last one we worked on involving a contact form API with Lambda, API Gateway, and SES), I’ll structure it professionally, with all necessary sections: project overview, architecture, setup, deployment, testing, and troubleshooting. Here’s a full draft:
 
-````markdown
 # AWS Serverless Contact Form API
 
 A fully serverless contact form API built using **AWS Lambda**, **API Gateway**, and **Amazon SES** for sending emails. This project demonstrates a scalable, cost-efficient serverless architecture to handle form submissions without managing servers.
@@ -11,6 +9,7 @@ A fully serverless contact form API built using **AWS Lambda**, **API Gateway**,
 
 - [Project Overview](#project-overview)
 - [Architecture](#architecture)
+- [Architecture Diagram](#architecture-diagram)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Setup & Installation](#setup--installation)
@@ -37,18 +36,22 @@ It is fully serverless and can scale automatically.
 
 ## Architecture
 
-```text
+```mermaid
 Client (Web/App)
       |
       v
 API Gateway (REST API)
       |
       v
-AWS Lambda (Node.js/Python)
+AWS Lambda (Python)
       |
       v
 Amazon SES (Email Service)
 ````
+
+## Architecture Diagram
+
+[![AWS Architecture](assets/diagram.png)](assets/diagram.png)
 
 **Key Points:**
 
@@ -75,7 +78,7 @@ Amazon SES (Email Service)
 * **AWS Lambda** – Serverless compute
 * **API Gateway** – REST API routing
 * **Amazon SES** – Email delivery
-* **Node.js 18.x** – Runtime (can be Python if desired)
+* **Python 3.12** – Runtime (can be Node.js if desired)
 * **AWS IAM** – Permissions management
 * **CloudWatch Logs** – Monitoring and debugging
 
@@ -86,19 +89,11 @@ Amazon SES (Email Service)
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/<your-username>/aws-serverless-contact-form.git
-cd aws-serverless-contact-form
+git clone https://github.com/Stennis1/aws-serverless.git
+cd project_dir
 ```
 
-2. **Install dependencies:**
-
-```bash
-npm install
-# or for Python
-pip install -r requirements.txt
-```
-
-3. **Configure AWS CLI:**
+2. **Configure AWS CLI:**
 
 ```bash
 aws configure
@@ -106,7 +101,7 @@ aws configure
 
 Ensure your IAM user has permissions for Lambda, SES, API Gateway, and CloudWatch.
 
-4. **Verify SES domain/email:**
+3. **Verify SES domain/email:**
 
 * Verify your sender and recipient emails in Amazon SES.
 * Set SES to **production mode** if required.
@@ -115,31 +110,20 @@ Ensure your IAM user has permissions for Lambda, SES, API Gateway, and CloudWatc
 
 ## Deployment
 
-### Using Serverless Framework (Recommended)
-
-```bash
-npm install -g serverless
-serverless deploy
-```
-
-This will:
-
-* Deploy the Lambda function.
-* Set up API Gateway endpoint.
-* Configure IAM roles.
-
 ### Manual AWS Deployment
 
-1. Zip the Lambda function and upload via AWS Console.
+1. Zip the Lambda function and upload via AWS Console (or post code and deploy in Lambda's Code editor).
 2. Create API Gateway REST API.
 3. Connect the Lambda function as POST `/contact`.
 4. Set up IAM roles with SES send permissions.
 
+> **Note**:  
+Set up environment variables (envs) in Lambda function -> Check [Environment Variables](#environment-variables).
 ---
 
 ## Testing
 
-1. **Using Postman / Curl:**
+1. **Using Curl:**
 
 ```bash
 curl -X POST https://<api-id>.execute-api.<region>.amazonaws.com/<stage>/contact \
@@ -151,7 +135,14 @@ curl -X POST https://<api-id>.execute-api.<region>.amazonaws.com/<stage>/contact
 }'
 ```
 
-2. **Expected Response:**
+2. **Using Postman**
+
+- Paste api url: e.g: https://<api-id>.execute-api.<region>.amazonaws.com/<stage>/contact.
+- Select **POST** as method header.
+- Under **body**, Select **raw** and **JSON** format.
+- Click **Send**
+
+3. **Expected Response Example:**
 
 ```json
 {
@@ -160,7 +151,7 @@ curl -X POST https://<api-id>.execute-api.<region>.amazonaws.com/<stage>/contact
 }
 ```
 
-3. **Error Response Example:**
+4. **Error Response Example:**
 
 ```json
 {
@@ -195,7 +186,7 @@ Set the following environment variables for the Lambda function:
 
 1. Fork the repository.
 2. Create a feature branch (`git checkout -b feature/my-feature`).
-3. Commit changes (`git commit -m 'Add feature'`).
+3. Commit changes (`git commit -m 'Add feature description'`).
 4. Push branch (`git push origin feature/my-feature`).
 5. Open a pull request.
 
@@ -203,13 +194,7 @@ Set the following environment variables for the Lambda function:
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](https://opensource.org/license/mit) for details.
 
-```
 
----
 
-If you want, I can also **create a `diagram.png` for the architecture** in AWS style and suggest where it can go in the README to make it visually professional.  
-
-Do you want me to do that next?
-```
